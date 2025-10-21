@@ -30,9 +30,17 @@ def add(items: list[str]):
 
 @app.command()
 def remove(items: list[str]):
-    with open('events.ics', 'r') as file:
-        c = Calendar(file)
-    
+    for item in items:
+        with open('events.ics', 'r') as file:
+            c = Calendar(file)
+        try:
+            date,name = item.split(';')
+            date = [int(n) for n in date.split('/')]
+            c.events.remove(Event(name, Arrow(date[0], date[1], date[2])))
+            with open('events.py', 'w', newline='', encoding='utf-8') as file:
+                file.writelines(c.serialize_iter)
+        except KeyError:
+            print('Event not in calendar')
 
 if __name__ == "__main__":
     app()
