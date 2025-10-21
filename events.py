@@ -28,5 +28,11 @@ def add(items: list[str]):
         except IndexError:
             pass
 
+@app.command()
+def remove(items: list[str]):
+    with open('events.ics', 'r') as file:
+        c = Calendar(file)
+    
+
 if __name__ == "__main__":
     app()
