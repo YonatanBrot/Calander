@@ -4,6 +4,7 @@ from datetime import datetime as dt
 from zoneinfo import ZoneInfo
 from ics.grammar.parse import ContentLine
 from pprint import pprint
+from arrow import Arrow
 
 c = Calendar(creator='-//YB/classes//EN')
 locations = {'Comp Sci': 'Computer room grade 7', 'Hebrew':'ה2', 'Tanach':'ה2', 'Literature':'ה2',
@@ -18,8 +19,8 @@ with open(r'.\classes_gen.csv', newline='') as file:
             row[i] = row[i].strip()
 
         events += [Event(row[i+2],
-                         dt(2025, 9, 7+i, int(row[0][:2]), int(row[0][2:])),
-                         dt(2025, 9, 7+i, int(row[1][:2]), int(row[1][2:])),
+                         Arrow(2025, 9, 7+i, int(row[0][:2]), int(row[0][2:]), tzinfo='+03:00'),
+                         Arrow(2025, 9, 7+i, int(row[1][:2]), int(row[1][2:]), tzinfo='+03:00'),
                          location=locations[row[i+2]])
                          for i in range(len(row[2:])) if row[i+2] != '']
 
