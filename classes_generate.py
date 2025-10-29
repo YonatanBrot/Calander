@@ -18,8 +18,8 @@ with open(r'.\classes_gen.csv', newline='') as file:
             row[i] = row[i].strip()
 
         events += [Event(row[i+2],
-                         dt(2025, 9, 7+i, int(row[0][:2]), int(row[0][2:]), tzinfo=ZoneInfo('Asia/Jerusalem')),
-                         dt(2025, 9, 7+i, int(row[1][:2]), int(row[1][2:]), tzinfo=ZoneInfo('Asia/Jerusalem')),
+                         dt(2025, 9, 7+i, int(row[0][:2]), int(row[0][2:])),
+                         dt(2025, 9, 7+i, int(row[1][:2]), int(row[1][2:])),
                          location=locations[row[i+2]])
                          for i in range(len(row[2:])) if row[i+2] != '']
 
