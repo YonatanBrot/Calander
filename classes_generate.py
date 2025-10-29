@@ -1,4 +1,3 @@
-import csv
 from ics import Event, Calendar
 from datetime import timezone
 from datetime import datetime as dt
@@ -12,7 +11,7 @@ locations = {'Comp Sci': 'Computer room grade 7', 'Hebrew':'ה2', 'Tanach':'ה2'
              'English':'Computer room Ofek', 'Gym':''}
 events = []
 
-with open('classes.csv', newline='') as file:
+with open(r'.\classes_gen.csv', newline='') as file:
     for row in file:
         row = row.replace('ï»¿', '').split(',')
         for i in range(len(row)):
@@ -35,5 +34,5 @@ for e in events:
     e.extra.append(ContentLine('RRULE', value="FREQ=WEEKLY;UNTIL=20260620T165959Z"))
     c.events.add(e)
 
-with open('classes.ics', 'w', encoding='utf-8', newline='') as file:
+with open(r'.\classes.ics', 'w', encoding='utf-8', newline='') as file:
     file.writelines(c.serialize_iter())
