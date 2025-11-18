@@ -55,7 +55,7 @@ def addAllDay(path:str, events:list[str]):
     except:
         c = Calendar()
     for event in events:
-        event = Event(event[:-8], event[-8:])
+        event = Event(event[:-8].replace('_', ' '), event[-8:])
         event.make_all_day()
         c.events.add(event)
     with open(path, 'w', encoding='utf-8', newline='') as file:
